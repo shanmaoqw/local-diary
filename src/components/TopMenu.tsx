@@ -16,11 +16,10 @@ export default function TopMenu () {
     <motion.div initial={{ translateY: -10 }} animate={{ translateY: 0 }} className="shadow select-none sticky z-50">
       <Container>
         <div className="flex justify-between font-pen text-2xl py-3">
-          <div onMouseEnter={onMouseEnter} className="cursor-default">{emoji ? '🌙' : '⭐'} All Day Diary</div>
+          <div onMouseEnter={onMouseEnter} className="cursor-default">{emoji ? '🌙' : '⭐'} Conch Diary</div>
           <div className="hidden sm:block">
-            오늘은&nbsp;
-            <CountUp delay={1} duration={0.5} end={date.getMonth() + 1}/>월&nbsp;
-            <CountUp delay={1} duration={0.5} end={date.getDate()}/>일
+            <CountUp delay={1} duration={0.5} end={date.getMonth() + 1}/>&nbsp;
+            <CountUp delay={1} duration={0.5} end={date.getDate()}/>&nbsp;
           </div>
         </div>
       </Container>

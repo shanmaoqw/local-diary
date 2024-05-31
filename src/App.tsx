@@ -32,14 +32,11 @@ export default function App () {
       <TopMenu />
       <Container>
         <div className="py-3 flex gap-5">
-          <motion.div initial={{ translateX: '-200%' }} animate={{ translateX: 0 }} transition={{ delay: 1, duration: 0.3 }} className="w-1/3">
-            <div className="font-pen text-4xl mb-3">날짜를 선택해 주세요</div>
-            <motion.div whileHover={{ scale: 1.1 }} transition={{ bounce: 1 }}>
-              <Calendar calendarType="US" locale="ko-KR" onChange={onChange} value={value}/>
+          <motion.div initial={{ translateX: '-200%' }} animate={{ translateX: 0 }} transition={{ delay: 1, duration: 0.3 }} className="w-2/5  out-note-parant">
+            <motion.div transition={{ bounce: 1 }}>
+              <Calendar calendarType="ISO 8601" locale="zh-cn" onChange={onChange} value={value}/>
             </motion.div>
-            <div className="py-10">
-              팀장: 박민혁, 팀원: 김성희
-            </div>
+            <button className="bg-gray-500 rounded-md px-3 py-2 mt-5 out-note-child">导出日记</button>
           </motion.div>
           <Card year={value.getFullYear()} month={value.getMonth() + 1} day={value.getDate()}/>
         </div>

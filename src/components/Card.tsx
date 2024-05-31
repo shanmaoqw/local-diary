@@ -10,6 +10,7 @@ import xss from 'xss'
 
 const editorOption: SetOptions = {
   mode: 'inline',
+  height: '150',
   buttonList: [
     [
       'paragraphStyle',
@@ -32,15 +33,9 @@ const editorOption: SetOptions = {
       'lineHeight',
       'table',
       'link',
-      'image',
-      'video',
-      'audio',
-      'imageGallery',
-      'fullScreen',
       'showBlocks',
       'codeView',
-      'preview',
-      'template'
+      'preview'
     ]
   ]
 }
@@ -80,21 +75,18 @@ export default function Card ({ year, month, day }: { year: number, month: numbe
   }
 
   return (
-    <motion.div initial={{ translateX: '200%' }} animate={{ translateX: 0 }} transition={{ delay: 1, duration: 0.3 }} className="w-2/3">
+    <motion.div initial={{ translateX: '200%' }} animate={{ translateX: 0 }} transition={{ delay: 1, duration: 0.3 }} className="w-3/5">
       <div style={{ backgroundColor: '#353A45' }} className="shadow-md p-5 w-full rounded-xl">
-        <h1 className="font-pen text-4xl">{year}년 {month}월 {day}일 일기</h1>
-
-        {!diary && <p>아직 일기가 없습니다.</p>}
-        {!isEditorVisible && diary?.content && <div className="font-pen text-xl" dangerouslySetInnerHTML={{ __html: xss(diary.content) }} />}
-
+        {!diary && <p>您还没有日记</p>}
+        {!isEditorVisible && diary?.content && <div className="font-serif text-xl show-height" dangerouslySetInnerHTML={{ __html: xss(diary.content) }} />}
         {isEditorVisible && (
           <div className="py-3">
-            <SunEditor placeholder="여기를 눌러 일기 작성을 시작하세요" getSunEditorInstance={getSunEditorInstance} width="100%" height="30vh" defaultValue={diary?.content} setOptions={editorOption} />
-            <button onClick={apply} className="mt-3 rounded-md bg-green-500 px-3 py-2">완료</button>
+            <SunEditor lang="zh_cn" placeholder="单击此处开始您的日记" getSunEditorInstance={getSunEditorInstance} width="100%" height="65vh" defaultValue={diary?.content} setOptions={editorOption} />
+            <button onClick={apply} className="mt-3 rounded-md bg-green-500 px-3 py-2">完成</button>
           </div>
         )}
       </div>
-      {new Date(year, month - 1, day).getTime() < new Date().getTime() && <button className="bg-gray-500 rounded-md px-3 py-2 mt-5" onClick={() => setEditorVisiblity(!isEditorVisible)}>{!diary ? '일기 쓰기' : '일기 편집'} <FontAwesomeIcon icon={isEditorVisible ? faCaretDown : faCaretUp}/></button>}
+      {new Date(year, month - 1, day).getTime() < new Date().getTime() && <button className="bg-gray-500 rounded-md px-3 py-2 mt-5" onClick={() => setEditorVisiblity(!isEditorVisible)}>{!diary ? '写日记' : '编辑日记'} <FontAwesomeIcon icon={isEditorVisible ? faCaretDown : faCaretUp}/></button>}
     </motion.div>
   )
 }
